@@ -1,11 +1,3 @@
-//Потрібно: Описати клас з ім'ям Worker, що містить такі поля:
-//прізвище та ініціали працівника;
-//назва посади;
-//рік надходження на роботу.
-//Написати програму, яка виконує такі дії:
-//введення з клавіатури даних до масиву, що складається з п'яти елементів типу Worker (записи мають бути впорядковані за абеткою);
-//якщо значення року введено не у відповідному форматі, видає виняток.
-//виведення на екран прізвища працівника, стаж роботи якого перевищує введене значення.
 package Task6_05;
 
 import java.util.ArrayList;
@@ -13,8 +5,17 @@ import java.util.Collections;
 import java.util.Scanner;
 
 public class Main {
+    final static int currentYear=2023;
+    public static void showWorker(ArrayList<Worker> someWorkers, int workYears){
+        for (Worker w: someWorkers) {
+            if(currentYear - w.getStartingYear() > workYears){
+                System.out.println(w.getFullName() + " has worked more than "+workYears +" years.");
+            }
+        }
+    }
+
     public static void main(String[] args) {
-        final int currentYear=2023;
+
         Scanner scanner=new Scanner(System.in);
         String name, job;
         int year;
@@ -44,9 +45,10 @@ public class Main {
                 break;
             }
         }
-        if(workers.size()>1) {
+        if(workers.size()>0) {
             Collections.sort(workers, new WorkerComparator());
-            System.out.println("Sorted workers: \n" + workers);
+            System.out.println("Sorted workers: \n" + workers+"\n");
+            showWorker(workers, 5);
         }
     }
 }
